@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}New Entry - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="entry-form-card">
+                    <h1 class="page-title mb-4">New Journal Entry</h1>
+                    
+                    <form method="POST" action="{{ url_for('new_entry') }}">
+                        <!-- Reflection Prompts -->
+                        <div class="prompts-section mb-4">
+                            <h5 class="mb-3">Reflection Prompts:</h5>
+                            <ul class="prompt-list">
+                                <li>What did I do today?</li>
+                                <li>What went well?</li>
+                                <li>What could I improve?</li>
+                                <li>Which soft skills did I use?</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Journal Content -->
+                        <div class="mb-4">
+                            <label for="content" class="form-label fw-semibold">Your Reflection</label>
+                            <textarea class="form-control" id="content" name="content" rows="8" required placeholder="Write your thoughts and reflections here..."></textarea>
+                        </div>
+                        
+                        <!-- Mood Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">How are you feeling today?</label>
+                            <div class="mood-options">
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="Happy" required>
+                                    <span class="mood-label">
+                                        <span class="mood-emoji">😊</span>
+                                        <span>Happy</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="Neutral" required>
+                                    <span class="mood-label">
+                                        <span class="mood-emoji">😐</span>
+                                        <span>Neutral</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="Sad" required>
+                                    <span class="mood-label">
+                                        <span class="mood-emoji">😔</span>
+                                        <span>Sad</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Which soft skills did you use today?</label>
+                            <div class="skills-checkboxes">
+                                <label class="skill-checkbox">
+                                    <input type="checkbox" name="skills" value="Communication">
+                                    <span>Communication</span>
+                                </label>
+                                
+                                <label class="skill-checkbox">
+                                    <input type="checkbox" name="skills" value="Teamwork">
+                                    <span>Teamwork</span>
+                                </label>
+                                
+                                <label class="skill-checkbox">
+                                    <input type="checkbox" name="skills" value="Problem-Solving">
+                                    <span>Problem-Solving</span>
+                                </label>
+                                
+                                <label class="skill-checkbox">
+                                    <input type="checkbox" name="skills" value="Time Management">
+                                    <span>Time Management</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary px-4">Save Entry</button>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

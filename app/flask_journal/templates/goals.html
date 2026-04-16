@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Goals - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="page-title">My Goals</h1>
+                <p class="text-muted">Set and track your soft skills improvement goals</p>
+            </div>
+        </div>
+        
+        <!-- Add Goal Form -->
+        <div class="row mb-5">
+            <div class="col-lg-8">
+                <div class="goal-form-card">
+                    <h4 class="mb-3">Add New Goal</h4>
+                    <form method="POST" action="{{ url_for('goals') }}" class="d-flex gap-3">
+                        <input type="text" class="form-control" name="goal_text" placeholder="e.g., Improve Communication Skills" required>
+                        <button type="submit" class="btn btn-primary text-nowrap">Add Goal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Goals List -->
+        {% if goals %}
+        <div class="row">
+            <div class="col-lg-8">
+                <h4 class="mb-3">Active Goals ({{ goals|length }})</h4>
+                <div class="goals-list">
+                    {% for goal in goals %}
+                    <div class="goal-item">
+                        <div class="goal-icon">🎯</div>
+                        <div class="goal-content">
+                            <p class="goal-text">{{ goal['goal_text'] }}</p>
+                            <p class="goal-date">Added on {{ goal['created_at'][:10] }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="empty-state">
+                    <div class="empty-icon">🎯</div>
+                    <h3>No goals yet</h3>
+                    <p class="text-muted">Set your first goal to start improving your soft skills</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

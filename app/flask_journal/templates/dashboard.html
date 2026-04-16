@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="page-title">My Journal Entries</h1>
+                <p class="text-muted">Track your daily reflections and growth</p>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="{{ url_for('new_entry') }}" class="btn btn-primary btn-lg">
+                    <span>➕</span> Add New Entry
+                </a>
+            </div>
+        </div>
+        
+        {% if entries %}
+        <div class="row">
+            {% for entry in entries %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <span class="entry-date">{{ entry['created_at'][:10] }}</span>
+                        <span class="mood-badge mood-{{ entry['mood'].lower() }}">{{ entry['mood'] }}</span>
+                    </div>
+                    
+                    <div class="entry-content">
+                        <p>{{ entry['content'][:150] }}{% if entry['content']|length > 150 %}...{% endif %}</p>
+                    </div>
+                    
+                    <div class="entry-footer">
+                        <div class="skills-tags">
+                            {% if entry['skills'] and entry['skills'] != 'None' %}
+                                {% for skill in entry['skills'].split(', ') %}
+                                <span class="skill-tag">{{ skill }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="text-muted small">No skills tagged</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3>No entries yet</h3>
+                    <p class="text-muted">Start your reflection journey by adding your first entry</p>
+                    <a href="{{ url_for('new_entry') }}" class="btn btn-primary mt-3">Create First Entry</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

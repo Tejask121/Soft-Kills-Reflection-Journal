@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="page-title mb-4">My Profile</h1>
+                
+                <div class="profile-card mb-4">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            {{ user['name'][0].upper() }}
+                        </div>
+                        <div class="profile-info">
+                            <h2 class="profile-name">{{ user['name'] }}</h2>
+                            <p class="profile-email">{{ user['email'] }}</p>
+                            <p class="profile-date">Member since {{ user['created_at'][:10] }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon">📝</div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">{{ entry_count }}</h3>
+                                <p class="stats-label">Journal Entries</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon">🎯</div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">{{ goal_count }}</h3>
+                                <p class="stats-label">Active Goals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h4 class="mb-3">Quick Actions</h4>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="{{ url_for('new_entry') }}" class="btn btn-primary">Add New Entry</a>
+                        <a href="{{ url_for('goals') }}" class="btn btn-outline-primary">Manage Goals</a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
